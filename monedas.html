@@ -15,57 +15,47 @@
 
 <svg width="0" height="0" style="position:absolute" aria-hidden="true" focusable="false">
 <defs>
-<radialGradient id="ntlGold" cx="35%" cy="30%" r="75%">
-<stop offset="0%" stop-color="#fff6d8"/>
-<stop offset="35%" stop-color="#f4cf6e"/>
-<stop offset="60%" stop-color="#d9a53a"/>
-<stop offset="85%" stop-color="#a8781f"/>
-<stop offset="100%" stop-color="#7c5714"/>
+<radialGradient id="ntlGold" cx="35%" cy="28%" r="80%">
+<stop offset="0%" stop-color="#fffbe0"/>
+<stop offset="30%" stop-color="#ffe45c"/>
+<stop offset="60%" stop-color="#f9c623"/>
+<stop offset="85%" stop-color="#e8a80c"/>
+<stop offset="100%" stop-color="#c98a06"/>
 </radialGradient>
 <radialGradient id="ntlGoldEdge" cx="50%" cy="50%" r="50%">
-<stop offset="78%" stop-color="#b8862a"/>
-<stop offset="100%" stop-color="#5f4110"/>
+<stop offset="75%" stop-color="#e0a412"/>
+<stop offset="100%" stop-color="#9a6b04"/>
 </radialGradient>
-<path id="coinRimTop" d="M 24,100 A 76,76 0 0 1 176,100"/>
-<path id="coinRimBottom" d="M 176,100 A 76,76 0 0 1 24,100"/>
+<path id="coinRimFull" d="M 100,20 A 80,80 0 1,1 100,180 A 80,80 0 1,1 100,20"/>
+<filter id="coinEmboss" x="-30%" y="-30%" width="160%" height="160%">
+<feDropShadow dx="0" dy="0.7" stdDeviation="0.35" flood-color="#000000" flood-opacity="0.5"/>
+</filter>
 
 <symbol id="ntl-coin-face" viewBox="0 0 200 200">
 <circle cx="100" cy="100" r="96" fill="url(#ntlGoldEdge)"/>
-<circle cx="100" cy="100" r="90" fill="url(#ntlGold)" stroke="#6b4a12" stroke-width="1"/>
-<circle cx="100" cy="100" r="90" fill="none" stroke="#fff6d8" stroke-width="1" opacity="0.35"/>
-<circle cx="100" cy="100" r="94" fill="none" stroke="#6b4a12" stroke-width="2" stroke-dasharray="1.6 2.4" opacity="0.55"/>
-<circle cx="100" cy="100" r="68" fill="none" stroke="#6b4a12" stroke-width="1" stroke-dasharray="0.8 3.2" opacity="0.4"/>
-<g stroke="#8a6218" stroke-width="1.1" fill="none" opacity="0.55" stroke-linecap="round">
-<line x1="148" y1="100" x2="178" y2="100"/><circle cx="178" cy="100" r="1.8" fill="#8a6218"/>
-<line x1="141.6" y1="124" x2="167.5" y2="139"/><circle cx="167.5" cy="139" r="1.8" fill="#8a6218"/>
-<line x1="124" y1="141.6" x2="139" y2="167.5"/><circle cx="139" cy="167.5" r="1.8" fill="#8a6218"/>
-<line x1="100" y1="148" x2="100" y2="178"/><circle cx="100" cy="178" r="1.8" fill="#8a6218"/>
-<line x1="76" y1="141.6" x2="61" y2="167.5"/><circle cx="61" cy="167.5" r="1.8" fill="#8a6218"/>
-<line x1="58.4" y1="124" x2="32.5" y2="139"/><circle cx="32.5" cy="139" r="1.8" fill="#8a6218"/>
-<line x1="52" y1="100" x2="22" y2="100"/><circle cx="22" cy="100" r="1.8" fill="#8a6218"/>
-<line x1="58.4" y1="76" x2="32.5" y2="61"/><circle cx="32.5" cy="61" r="1.8" fill="#8a6218"/>
-<line x1="76" y1="58.4" x2="61" y2="32.5"/><circle cx="61" cy="32.5" r="1.8" fill="#8a6218"/>
-<line x1="100" y1="52" x2="100" y2="22"/><circle cx="100" cy="22" r="1.8" fill="#8a6218"/>
-<line x1="124" y1="58.4" x2="139" y2="32.5"/><circle cx="139" cy="32.5" r="1.8" fill="#8a6218"/>
-<line x1="141.6" y1="76" x2="167.5" y2="61"/><circle cx="167.5" cy="61" r="1.8" fill="#8a6218"/>
+<circle cx="100" cy="100" r="90" fill="url(#ntlGold)" stroke="#b9860a" stroke-width="1"/>
+<circle cx="100" cy="100" r="90" fill="none" stroke="#fffbe0" stroke-width="1" opacity="0.4"/>
+<circle cx="100" cy="100" r="94" fill="none" stroke="#b9860a" stroke-width="2" stroke-dasharray="1.6 2.4" opacity="0.5"/>
+<circle cx="100" cy="100" r="73" fill="none" stroke="#ffffff" stroke-width="0.8" opacity="0.4"/>
+<g fill="#ffffff" filter="url(#coinEmboss)">
+<text font-family="'Playfair Display', Georgia, serif" font-weight="700" font-size="9.5" letter-spacing="1">
+<textPath href="#coinRimFull" startOffset="0%">NTL COIN &#9670; NTL COIN &#9670; NTL COIN &#9670; NTL COIN &#9670; NTL COIN &#9670; NTL COIN &#9670; NTL COIN &#9670; NTL COIN &#9670;</textPath>
+</text>
+<path d="M100,49 L102.1,55.1 L108.6,55.2 L103.4,59.1 L105.3,65.3 L100,61.6 L94.7,65.3 L96.6,59.1 L91.4,55.2 L97.9,55.1 Z"/>
+<path d="M80,58 L81.4,62.1 L85.7,62.1 L82.3,64.7 L83.5,68.9 L80,66.4 L76.5,68.9 L77.7,64.7 L74.3,62.1 L78.6,62.1 Z"/>
+<path d="M120,58 L118.6,62.1 L114.3,62.1 L117.7,64.7 L116.5,68.9 L120,66.4 L123.5,68.9 L122.3,64.7 L125.7,62.1 L121.4,62.1 Z"/>
+<ellipse cx="100" cy="128" rx="47" ry="23" fill="none" stroke="#ffffff" stroke-width="3"/>
+<text x="100" y="137" text-anchor="middle" font-family="'Playfair Display', Georgia, serif" font-weight="700" font-style="italic" font-size="27" letter-spacing="1">NTL</text>
 </g>
-<rect x="52" y="82" width="96" height="36" rx="18" fill="#0b0b0b" stroke="#f4cf6e" stroke-width="2"/>
-<text x="100" y="107" text-anchor="middle" font-family="'Playfair Display', Georgia, serif" font-weight="700" font-size="30" fill="#f4cf6e" letter-spacing="2">NTL</text>
-<text font-family="'Playfair Display', Georgia, serif" font-size="8" letter-spacing="2.4" fill="#6b4a12" opacity="0.85">
-<textPath href="#coinRimTop" startOffset="50%" text-anchor="middle">NTL · DIGITAL ASSET</textPath>
-</text>
-<text font-family="'Playfair Display', Georgia, serif" font-size="8" letter-spacing="2.4" fill="#6b4a12" opacity="0.85">
-<textPath href="#coinRimBottom" startOffset="50%" text-anchor="middle">DIGITAL ASSET · NTL</textPath>
-</text>
-<ellipse cx="72" cy="62" rx="46" ry="26" fill="#fff6d8" opacity="0.22" transform="rotate(-18 72 62)"/>
+<ellipse cx="72" cy="62" rx="46" ry="26" fill="#fffbe0" opacity="0.16" transform="rotate(-18 72 62)"/>
 </symbol>
 
 <symbol id="ntl-coin-simple" viewBox="0 0 200 200">
 <circle cx="100" cy="100" r="96" fill="url(#ntlGoldEdge)"/>
 <circle cx="100" cy="100" r="88" fill="url(#ntlGold)"/>
-<circle cx="100" cy="100" r="88" fill="none" stroke="#fff6d8" stroke-width="1.5" opacity="0.3"/>
-<rect x="46" y="78" width="108" height="44" rx="22" fill="#0b0b0b" stroke="#f4cf6e" stroke-width="3"/>
-<text x="100" y="112" text-anchor="middle" font-family="'Playfair Display', Georgia, serif" font-weight="700" font-size="38" fill="#f4cf6e" letter-spacing="2">NTL</text>
+<circle cx="100" cy="100" r="88" fill="none" stroke="#fffbe0" stroke-width="1.5" opacity="0.3"/>
+<ellipse cx="100" cy="100" rx="54" ry="30" fill="none" stroke="#ffffff" stroke-width="4"/>
+<text x="100" y="112" text-anchor="middle" font-family="'Playfair Display', Georgia, serif" font-weight="700" font-style="italic" font-size="34" fill="#ffffff" letter-spacing="1">NTL</text>
 </symbol>
 </defs>
 </svg>
