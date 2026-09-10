@@ -107,6 +107,28 @@
     });
   }
 
+  /* ---------------- 3D logo depth (visible edge while it spins) ---------------- */
+  function initCoinDepth() {
+    document.querySelectorAll(".coin-logo .coin-3d").forEach(function (stage3d) {
+      if (stage3d.dataset.depthBuilt) return;
+      stage3d.dataset.depthBuilt = "1";
+      var stage = stage3d.closest(".coin-stage");
+      var h = stage ? parseFloat(getComputedStyle(stage).getPropertyValue("--coin-h")) : NaN;
+      if (!h || isNaN(h)) h = 74;
+      var thickness = Math.max(4, h * 0.11);
+      var count = 24;
+      var back = stage3d.querySelector(".coin-face.back");
+      for (var i = 1; i < count; i++) {
+        var z = -thickness / 2 + (thickness * i) / count;
+        var slice = document.createElement("div");
+        slice.className = "coin-edge";
+        slice.style.transform = "translateZ(" + z.toFixed(2) + "px)";
+        if (back) stage3d.insertBefore(slice, back);
+        else stage3d.appendChild(slice);
+      }
+    });
+  }
+
   /* ---------------- wallet chip everywhere ---------------- */
   function initWalletDisplays() {
     if (!WALLET) return;
@@ -371,6 +393,7 @@
   /* ---------------- boot ---------------- */
   function boot() {
     safe(initNav, "initNav");
+    safe(initCoinDepth, "initCoinDepth");
     safe(initWalletDisplays, "initWalletDisplays");
     safe(function () { mountProducts("[data-home-products]", DATA.products.slice(0, 3)); }, "mountHomeProducts");
     safe(function () { mountProducts("[data-shop-products]", DATA.products); }, "mountShopProducts");
