@@ -31,8 +31,13 @@
   --lt-mute: rgba(12, 17, 22, 0.62);
   --lt-line: rgba(12, 17, 22, 0.14);
 
-  --font-display: "Bodoni Moda", "Big Caslon", Georgia, "Times New Roman", serif;
-  --font-body: "Inter", -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+  --font-display: "Cinzel", "Trajan Pro", Georgia, "Times New Roman", serif;
+  --font-body: "Manrope", -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+
+  --gold: #d9a53a;
+  --gold-light: #f4cf6e;
+  --gold-dark: #7c5714;
+  --gold-glow: rgba(217, 165, 58, 0.45);
 
   --nav-h: 76px;
   --ease-out: cubic-bezier(0.16, 1, 0.3, 1);
@@ -93,35 +98,43 @@ h1, h2, h3, h4, p { margin: 0; }
 .reveal.is-visible { opacity: 1; transform: none; }
 .reveal[data-split] { opacity: 1; transform: none; }
 
-/* ---------- NTL wordmark + badge ---------- */
-.ntl-word {
-  font-family: var(--font-display);
-  font-weight: 600;
-  letter-spacing: 0.06em;
+/* ---------- NTL gold coin logo (3D, spinning) ---------- */
+.coin-logo { display: inline-flex; }
+.coin-logo .coin-stage {
+  width: var(--coin-size, 140px);
+  aspect-ratio: 1;
+  perspective: 900px;
+  margin-inline: auto;
+  /* drop-shadow lives here, NOT on .coin-3d: a `filter` on the element that
+     also carries transform-style:preserve-3d flattens the 3D context in
+     Chromium, breaking backface-visibility and mirroring the back face. */
+  filter: drop-shadow(0 18px 30px rgba(0, 0, 0, 0.4));
 }
-.badge {
-  --badge-w: 132px;
-  --badge-h: 74px;
-  width: var(--badge-w);
-  height: var(--badge-h);
+.coin-logo .coin-3d {
+  position: relative;
+  width: 100%;
+  height: 100%;
+  transform-style: preserve-3d;
+  animation: coinSpin 6.5s linear infinite;
+}
+.coin-logo .coin-face {
+  position: absolute;
+  inset: 0;
   border-radius: 50%;
-  background: #0a0a0a;
-  display: inline-flex;
-  align-items: center;
-  justify-content: center;
-  box-shadow: 0 1px 0 rgba(255, 255, 255, 0.08) inset, 0 18px 40px rgba(0, 0, 0, 0.35);
-  flex-shrink: 0;
+  backface-visibility: hidden;
 }
-.badge span {
-  font-family: var(--font-display);
-  font-weight: 600;
-  color: #fdfdfd;
-  font-size: calc(var(--badge-h) * 0.42);
-  letter-spacing: 0.05em;
-  transform: translateY(-1px);
+.coin-logo .coin-face.back { transform: rotateY(180deg); }
+.coin-logo .coin-face svg { width: 100%; height: 100%; display: block; }
+.coin-logo.lg { --coin-size: 200px; }
+.coin-logo.sm { --coin-size: 76px; }
+@keyframes coinSpin {
+  from { transform: rotateY(0deg); }
+  to { transform: rotateY(360deg); }
 }
-.badge.sm { --badge-w: 76px; --badge-h: 42px; }
-.badge.lg { --badge-w: 220px; --badge-h: 124px; }
+
+/* small static gold-coin currency glyph (wallet chip, price tags, packs) */
+.coin-ico, .pack-coin svg { display: block; }
+.coin-ico { flex-shrink: 0; }
 
 /* ---------- buttons ---------- */
 .btn {
@@ -253,13 +266,7 @@ h1, h2, h3, h4, p { margin: 0; }
   color: var(--accent);
   letter-spacing: 0.01em;
 }
-.wallet-chip .coin-ico {
-  width: 20px; height: 20px;
-  border-radius: 50%;
-  background: radial-gradient(circle at 32% 28%, #fdf3c8, var(--accent) 55%, var(--accent-2) 100%);
-  box-shadow: inset 0 0 0 1px rgba(0,0,0,.15);
-  flex-shrink: 0;
-}
+.wallet-chip .coin-ico { width: 20px; height: 20px; }
 .wallet-chip strong { font-variant-numeric: tabular-nums; }
 
 .nav-toggle {
@@ -363,7 +370,7 @@ h1, h2, h3, h4, p { margin: 0; }
   gap: 1.7rem;
   padding-top: var(--nav-h);
 }
-.hero-inner .badge { margin-bottom: 0.4rem; }
+.hero-inner .coin-logo { margin-bottom: 0.4rem; }
 .hero-kicker {
   font-size: 0.76rem;
   font-weight: 700;
@@ -382,7 +389,7 @@ h1, h2, h3, h4, p { margin: 0; }
   max-width: 16ch;
   margin-inline: auto;
 }
-.hero-title em { font-style: italic; color: #041018; }
+.hero-title em { font-style: normal; color: var(--gold-dark); }
 .hero-sub {
   font-size: 1.05rem;
   color: rgba(6, 20, 28, 0.78);
@@ -438,7 +445,7 @@ section { position: relative; }
   font-size: clamp(1.9rem, 4vw, 3.1rem);
   line-height: 1.05;
 }
-.section-title em { font-style: italic; color: var(--accent); }
+.section-title em { font-style: normal; color: var(--gold-light); }
 .section-lede { color: var(--ink-mute); font-size: 1.02rem; max-width: 52ch; }
 
 .halo {
@@ -579,7 +586,7 @@ section { position: relative; }
   font-weight: 700;
   font-variant-numeric: tabular-nums;
 }
-.price-tag .coin-ico { width: 16px; height: 16px; border-radius: 50%; background: radial-gradient(circle at 32% 28%, #fdf3c8, var(--accent) 55%, var(--accent-2) 100%); flex-shrink: 0; }
+.price-tag .coin-ico { width: 16px; height: 16px; }
 .card-cta {
   font-size: 0.78rem;
   padding: 0.6em 1.1em;
@@ -607,27 +614,33 @@ section { position: relative; }
 .coin-orbit .coin-big {
   position: absolute;
   inset: 0;
-  border-radius: 50%;
-  background: radial-gradient(circle at 32% 26%, #fff6d6 0%, var(--accent) 42%, var(--accent-2) 72%, var(--accent-deep) 100%);
-  box-shadow: 0 30px 70px -20px var(--accent-glow), inset 0 0 0 6px rgba(255,255,255,0.12), inset 0 -14px 30px rgba(0,0,0,.25);
-  display: flex;
-  align-items: center;
-  justify-content: center;
   animation: coinFloat 6s var(--ease-in-out) infinite;
+  perspective: 1000px;
+  /* drop-shadow here, not on .coin-3d — see note on .coin-logo .coin-stage */
+  filter: drop-shadow(0 30px 50px var(--gold-glow));
 }
-.coin-orbit .coin-big span {
-  font-family: var(--font-display);
-  font-size: clamp(2.6rem, 7vw, 3.6rem);
-  color: rgba(6, 20, 28, 0.82);
-  font-weight: 600;
+.coin-orbit .coin-big .coin-3d {
+  position: relative;
+  width: 100%;
+  height: 100%;
+  transform-style: preserve-3d;
+  animation: coinSpin 7s linear infinite;
 }
+.coin-orbit .coin-big .coin-face {
+  position: absolute;
+  inset: 0;
+  border-radius: 50%;
+  backface-visibility: hidden;
+}
+.coin-orbit .coin-big .coin-face.back { transform: rotateY(180deg); }
+.coin-orbit .coin-big .coin-face svg { width: 100%; height: 100%; display: block; }
 .coin-orbit .coin-small {
   position: absolute;
-  width: 26%; aspect-ratio: 1;
-  border-radius: 50%;
-  background: radial-gradient(circle at 32% 26%, #fff6d6 0%, var(--accent) 45%, var(--accent-deep) 100%);
-  box-shadow: 0 14px 30px -10px var(--accent-glow);
+  width: 26%;
+  aspect-ratio: 1;
+  filter: drop-shadow(0 14px 24px var(--gold-glow));
 }
+.coin-orbit .coin-small svg { width: 100%; height: 100%; display: block; }
 .coin-orbit .coin-small.a { top: 4%; right: 6%; animation: coinFloat 5s var(--ease-in-out) infinite reverse; }
 .coin-orbit .coin-small.b { bottom: 2%; left: 0%; width: 18%; animation: coinFloat 7s var(--ease-in-out) infinite; }
 @keyframes coinFloat { 0%, 100% { transform: translateY(0); } 50% { transform: translateY(-14px); } }
@@ -779,12 +792,8 @@ section { position: relative; }
 }
 .pack-coin {
   width: 64px; height: 64px;
-  border-radius: 50%;
-  background: radial-gradient(circle at 32% 26%, #fff6d6 0%, var(--accent) 45%, var(--accent-deep) 100%);
-  display: flex; align-items: center; justify-content: center;
-  box-shadow: 0 14px 30px -10px var(--accent-glow);
+  filter: drop-shadow(0 14px 26px var(--gold-glow));
 }
-.pack-coin span { font-family: var(--font-display); font-size: 1.3rem; color: rgba(6,20,28,.8); font-weight: 600; }
 .pack-amount { font-family: var(--font-display); font-size: 2.1rem; font-variant-numeric: tabular-nums; }
 .pack-amount small { font-size: 1rem; color: var(--ink-mute); font-family: var(--font-body); font-weight: 500; }
 .pack-name { font-size: 0.9rem; color: var(--ink-mute); }

@@ -129,7 +129,7 @@
         '<h3 class="product-name">' + p.name + "</h3>" +
         '<p class="product-blurb">' + p.blurb + "</p>" +
         '<div class="product-foot">' +
-          '<span class="price-tag"><span class="coin-ico"></span>' + fmt(p.price) + "</span>" +
+          '<span class="price-tag"><svg class="coin-ico" viewBox="0 0 200 200"><use href="#ntl-coin-simple"></use></svg>' + fmt(p.price) + "</span>" +
           '<button class="btn card-cta buy-btn" data-buy="' + p.id + '" data-state="' + (short > 0 ? "short" : "ok") + '">' +
             (short > 0 ? "Ver ficha" : "Comprar") +
           "</button>" +
@@ -275,7 +275,7 @@
     return (
       '<article class="pack-card reveal">' +
         (pack.tag ? '<span class="pack-tag">' + pack.tag + "</span>" : "") +
-        '<div class="pack-coin"><span>N</span></div>' +
+        '<div class="pack-coin"><svg viewBox="0 0 200 200"><use href="#ntl-coin-simple"></use></svg></div>' +
         '<div><div class="pack-amount">' + fmt(pack.coins) + ' <small>coins</small></div>' +
           '<div class="pack-name">' + pack.name + "</div></div>" +
         '<div class="pack-price">' + euro(pack.price) + "</div>" +

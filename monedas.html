@@ -8,10 +8,65 @@
 <link rel="icon" type="image/svg+xml" href="assets/img/favicon.svg" />
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Bodoni+Moda:ital,wght@0,500;0,600;1,500&family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
-<link rel="stylesheet" href="styles.css?v=20260909" />
+<link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@400;500;600;700;800&family=Manrope:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="styles.css?v=20260910" />
 </head>
 <body>
+
+<svg width="0" height="0" style="position:absolute" aria-hidden="true" focusable="false">
+<defs>
+<radialGradient id="ntlGold" cx="35%" cy="30%" r="75%">
+<stop offset="0%" stop-color="#fff6d8"/>
+<stop offset="35%" stop-color="#f4cf6e"/>
+<stop offset="60%" stop-color="#d9a53a"/>
+<stop offset="85%" stop-color="#a8781f"/>
+<stop offset="100%" stop-color="#7c5714"/>
+</radialGradient>
+<radialGradient id="ntlGoldEdge" cx="50%" cy="50%" r="50%">
+<stop offset="78%" stop-color="#b8862a"/>
+<stop offset="100%" stop-color="#5f4110"/>
+</radialGradient>
+<path id="coinRimTop" d="M 24,100 A 76,76 0 0 1 176,100"/>
+<path id="coinRimBottom" d="M 176,100 A 76,76 0 0 1 24,100"/>
+
+<symbol id="ntl-coin-face" viewBox="0 0 200 200">
+<circle cx="100" cy="100" r="96" fill="url(#ntlGoldEdge)"/>
+<circle cx="100" cy="100" r="90" fill="url(#ntlGold)" stroke="#6b4a12" stroke-width="1"/>
+<circle cx="100" cy="100" r="90" fill="none" stroke="#fff6d8" stroke-width="1" opacity="0.35"/>
+<circle cx="100" cy="100" r="94" fill="none" stroke="#6b4a12" stroke-width="2" stroke-dasharray="1.6 2.4" opacity="0.55"/>
+<g stroke="#8a6218" stroke-width="1.1" fill="none" opacity="0.55" stroke-linecap="round">
+<line x1="148" y1="100" x2="178" y2="100"/><circle cx="178" cy="100" r="1.8" fill="#8a6218"/>
+<line x1="141.6" y1="124" x2="167.5" y2="139"/><circle cx="167.5" cy="139" r="1.8" fill="#8a6218"/>
+<line x1="124" y1="141.6" x2="139" y2="167.5"/><circle cx="139" cy="167.5" r="1.8" fill="#8a6218"/>
+<line x1="100" y1="148" x2="100" y2="178"/><circle cx="100" cy="178" r="1.8" fill="#8a6218"/>
+<line x1="76" y1="141.6" x2="61" y2="167.5"/><circle cx="61" cy="167.5" r="1.8" fill="#8a6218"/>
+<line x1="58.4" y1="124" x2="32.5" y2="139"/><circle cx="32.5" cy="139" r="1.8" fill="#8a6218"/>
+<line x1="52" y1="100" x2="22" y2="100"/><circle cx="22" cy="100" r="1.8" fill="#8a6218"/>
+<line x1="58.4" y1="76" x2="32.5" y2="61"/><circle cx="32.5" cy="61" r="1.8" fill="#8a6218"/>
+<line x1="76" y1="58.4" x2="61" y2="32.5"/><circle cx="61" cy="32.5" r="1.8" fill="#8a6218"/>
+<line x1="100" y1="52" x2="100" y2="22"/><circle cx="100" cy="22" r="1.8" fill="#8a6218"/>
+<line x1="124" y1="58.4" x2="139" y2="32.5"/><circle cx="139" cy="32.5" r="1.8" fill="#8a6218"/>
+<line x1="141.6" y1="76" x2="167.5" y2="61"/><circle cx="167.5" cy="61" r="1.8" fill="#8a6218"/>
+</g>
+<rect x="52" y="82" width="96" height="36" rx="18" fill="#0b0b0b" stroke="#f4cf6e" stroke-width="2"/>
+<text x="100" y="107" text-anchor="middle" font-family="Cinzel, Georgia, serif" font-weight="700" font-size="30" fill="#f4cf6e" letter-spacing="2">NTL</text>
+<text font-family="Cinzel, Georgia, serif" font-size="8" letter-spacing="2.4" fill="#6b4a12" opacity="0.85">
+<textPath href="#coinRimTop" startOffset="50%" text-anchor="middle">NTL · DIGITAL ASSET</textPath>
+</text>
+<text font-family="Cinzel, Georgia, serif" font-size="8" letter-spacing="2.4" fill="#6b4a12" opacity="0.85">
+<textPath href="#coinRimBottom" startOffset="50%" text-anchor="middle">DIGITAL ASSET · NTL</textPath>
+</text>
+</symbol>
+
+<symbol id="ntl-coin-simple" viewBox="0 0 200 200">
+<circle cx="100" cy="100" r="96" fill="url(#ntlGoldEdge)"/>
+<circle cx="100" cy="100" r="88" fill="url(#ntlGold)"/>
+<circle cx="100" cy="100" r="88" fill="none" stroke="#fff6d8" stroke-width="1.5" opacity="0.3"/>
+<rect x="46" y="78" width="108" height="44" rx="22" fill="#0b0b0b" stroke="#f4cf6e" stroke-width="3"/>
+<text x="100" y="112" text-anchor="middle" font-family="Cinzel, Georgia, serif" font-weight="700" font-size="38" fill="#f4cf6e" letter-spacing="2">NTL</text>
+</symbol>
+</defs>
+</svg>
 
 <header class="site-header" data-site-header>
   <div class="wrap">
@@ -23,7 +78,7 @@
       <a href="index.html#manifiesto">Manifiesto</a>
     </nav>
     <div class="header-actions">
-      <a href="monedas.html" class="wallet-chip"><span class="coin-ico"></span><strong data-wallet-balance>0</strong> NTL</a>
+      <a href="monedas.html" class="wallet-chip"><svg class="coin-ico" viewBox="0 0 200 200"><use href="#ntl-coin-simple"></use></svg><strong data-wallet-balance>0</strong> NTL</a>
       <button class="nav-toggle" data-nav-toggle aria-label="Abrir menú"><span></span></button>
     </div>
   </div>
@@ -33,12 +88,12 @@
   <section class="page-hero">
     <div class="wrap">
       <span class="eyebrow">NTL Coins</span>
-      <h1 class="section-title" style="margin-top:.8rem;">Recarga tu <em style="font-style:italic;color:var(--accent);">saldo</em>.</h1>
+      <h1 class="section-title" style="margin-top:.8rem;">Recarga tu <em style="font-style:normal;color:var(--accent);">saldo</em>.</h1>
       <p class="section-lede" style="margin-top:.9rem;">Cada lote está calibrado para una pieza de la colección. El sobrante se queda en tu cuenta para la próxima recarga.</p>
 
       <div class="wallet-banner">
         <div class="wb-left">
-          <span class="coin-ico" style="width:34px;height:34px;"></span>
+          <svg class="coin-ico" viewBox="0 0 200 200" style="width:34px;height:34px;"><use href="#ntl-coin-simple"></use></svg>
           <div>
             <div class="wb-label">Tu saldo actual</div>
             <div class="wb-balance"><span data-wallet-balance>0</span> NTL Coins</div>
@@ -75,7 +130,12 @@
 <footer class="lt-section">
   <div class="wrap footer-top">
     <div class="footer-brand">
-      <div class="badge sm"><span class="ntl-word">NTL</span></div>
+      <div class="coin-logo sm" role="img" aria-label="Not Luck">
+        <div class="coin-stage"><div class="coin-3d">
+          <div class="coin-face front"><svg viewBox="0 0 200 200"><use href="#ntl-coin-face"></use></svg></div>
+          <div class="coin-face back"><svg viewBox="0 0 200 200"><use href="#ntl-coin-face"></use></svg></div>
+        </div></div>
+      </div>
       <p>Not Luck es una casa de streetwear de edición limitada. Sin azar, sin rebajas de pánico — solo NTL Coins y piezas contadas.</p>
     </div>
     <div class="footer-cols">
@@ -148,8 +208,8 @@
   </div>
 </div>
 
-<script defer src="lib/manifest.js?v=20260909"></script>
-<script defer src="lib/wallet.js?v=20260909"></script>
-<script defer src="main.js?v=20260909"></script>
+<script defer src="lib/manifest.js?v=20260910"></script>
+<script defer src="lib/wallet.js?v=20260910"></script>
+<script defer src="main.js?v=20260910"></script>
 </body>
 </html>
