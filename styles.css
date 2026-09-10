@@ -98,7 +98,31 @@ h1, h2, h3, h4, p { margin: 0; }
 .reveal.is-visible { opacity: 1; transform: none; }
 .reveal[data-split] { opacity: 1; transform: none; }
 
-/* ---------- NTL logo badge (3D, spinning oval) ---------- */
+/* ============================================================
+   3D SPIN — shared mechanics for the logo badge and the gold coins.
+   A .coin-3d contains two .coin-face (front/back) plus a stack of thin
+   .coin-edge slices, all inserted by JS (initCoinDepth in main.js) once
+   the element's rendered height is known. Front/back sit at opposite
+   ends of a small Z depth (--half-t, set inline by that same JS) and the
+   edge slices fill the gap between them, so the spin shows real
+   thickness instead of a flat two-face card-flip.
+   ============================================================ */
+.coin-face,
+.coin-edge {
+  position: absolute;
+  inset: 0;
+  border-radius: 50%;
+}
+.coin-face { backface-visibility: hidden; }
+.coin-edge { pointer-events: none; background: #0a0a0a; }
+.coin-face.front { transform: translateZ(var(--half-t, 4px)); }
+.coin-face.back { transform: rotateY(180deg) translateZ(var(--half-t, 4px)); }
+@keyframes coinSpin {
+  from { transform: rotateY(0deg); }
+  to { transform: rotateY(360deg); }
+}
+
+/* ---------- NTL logo badge: black lacquer oval, spinning ---------- */
 .coin-logo { display: inline-flex; }
 .coin-logo .coin-stage {
   width: var(--coin-w, 132px);
@@ -112,7 +136,6 @@ h1, h2, h3, h4, p { margin: 0; }
 }
 .coin-logo.lg .coin-stage { --coin-w: 240px; --coin-h: 108px; }
 .coin-logo.sm .coin-stage { --coin-w: 84px; --coin-h: 38px; }
-.coin-logo .coin-stage { --half-t: calc(var(--coin-h, 74px) * 0.055); }
 .coin-logo .coin-3d {
   position: relative;
   width: 100%;
@@ -120,43 +143,50 @@ h1, h2, h3, h4, p { margin: 0; }
   transform-style: preserve-3d;
   animation: coinSpin 6.5s linear infinite;
 }
-.coin-logo .coin-face,
-.coin-logo .coin-edge {
-  position: absolute;
-  inset: 0;
-  border-radius: 50%;
-  background: #0a0a0a;
-}
 .coin-logo .coin-face {
   display: flex;
   align-items: center;
   justify-content: center;
-  backface-visibility: hidden;
-  box-shadow: 0 1px 0 rgba(255, 255, 255, 0.08) inset;
+  background: radial-gradient(120% 130% at 30% 22%, #262626 0%, #121212 42%, #050505 100%);
+  box-shadow:
+    0 0 0 1px rgba(0, 0, 0, 0.7),
+    0 1.5px 0 rgba(255, 255, 255, 0.14) inset,
+    0 -10px 16px rgba(0, 0, 0, 0.55) inset;
 }
+.coin-logo .coin-edge { background: linear-gradient(90deg, #050505, #2a2a2a 48%, #050505); }
 .coin-logo .coin-face span {
   font-family: var(--font-display);
   font-weight: 600;
-  color: #fdfdfd;
+  color: #fbfbfb;
   font-size: calc(var(--coin-h, 74px) * 0.42);
   letter-spacing: 0.05em;
+  text-shadow: 0 1px 0 rgba(255, 255, 255, 0.2), 0 -1px 1px rgba(0, 0, 0, 0.7);
   transform: translateY(-1px);
 }
-.coin-logo .coin-face.front { transform: translateZ(var(--half-t)); }
-.coin-logo .coin-face.back { transform: rotateY(180deg) translateZ(var(--half-t)); }
-/* thin duplicate ovals stacked along Z between the two faces: together they
-   read as the badge's edge/thickness while it turns, instead of a flat
-   card-flip. Positioned via JS (initCoinDepth) since the Z offsets depend
-   on --coin-h, which varies by size. */
-.coin-logo .coin-edge { pointer-events: none; }
-@keyframes coinSpin {
-  from { transform: rotateY(0deg); }
-  to { transform: rotateY(360deg); }
-}
 
-/* small static gold-coin currency glyph (wallet chip, price tags, packs) */
-.coin-ico, .pack-coin svg { display: block; }
-.coin-ico { flex-shrink: 0; }
+/* ---------- gold coins: NTL Coins currency, spinning ---------- */
+.gold-coin { display: inline-flex; }
+.gold-coin .coin-stage {
+  width: var(--gc, 64px);
+  height: var(--gc, 64px);
+  perspective: 640px;
+  filter: drop-shadow(0 14px 26px var(--gold-glow));
+}
+.gold-coin .coin-3d {
+  position: relative;
+  width: 100%;
+  height: 100%;
+  transform-style: preserve-3d;
+  animation: coinSpin 5.5s linear infinite;
+}
+.gold-coin .coin-face { background: transparent; }
+.gold-coin .coin-face svg { width: 100%; height: 100%; display: block; }
+.gold-coin .coin-edge { background: linear-gradient(90deg, #6b4a12, #e6c374 48%, #6b4a12); }
+
+/* small static gold-coin currency glyph (wallet chip, price tags) — kept
+   flat: at 16–20px a spinning coin with engraved detail just reads as
+   flicker, not motion, so these stay still and simple. */
+.coin-ico { display: block; flex-shrink: 0; }
 
 /* ---------- buttons ---------- */
 .btn {
@@ -648,14 +678,9 @@ section { position: relative; }
   transform-style: preserve-3d;
   animation: coinSpin 7s linear infinite;
 }
-.coin-orbit .coin-big .coin-face {
-  position: absolute;
-  inset: 0;
-  border-radius: 50%;
-  backface-visibility: hidden;
-}
-.coin-orbit .coin-big .coin-face.back { transform: rotateY(180deg); }
+.coin-orbit .coin-big .coin-face { background: transparent; }
 .coin-orbit .coin-big .coin-face svg { width: 100%; height: 100%; display: block; }
+.coin-orbit .coin-big .coin-edge { background: linear-gradient(90deg, #6b4a12, #e6c374 48%, #6b4a12); }
 .coin-orbit .coin-small {
   position: absolute;
   width: 26%;
@@ -811,10 +836,6 @@ section { position: relative; }
   border-radius: 999px;
   background: var(--accent);
   color: var(--accent-ink);
-}
-.pack-coin {
-  width: 64px; height: 64px;
-  filter: drop-shadow(0 14px 26px var(--gold-glow));
 }
 .pack-amount { font-family: var(--font-display); font-size: 2.1rem; font-variant-numeric: tabular-nums; }
 .pack-amount small { font-size: 1rem; color: var(--ink-mute); font-family: var(--font-body); font-weight: 500; }

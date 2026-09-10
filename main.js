@@ -107,16 +107,22 @@
     });
   }
 
-  /* ---------------- 3D logo depth (visible edge while it spins) ---------------- */
+  /* ---------------- 3D depth for any spinning badge/coin (visible edge while it spins) ----------------
+     Works for the logo badge, the gold coin packs, and the coin-orbit centerpiece: measures the
+     element's own rendered height, sets --half-t so CSS can push front/back to opposite Z extremes
+     (see .coin-face.front/.back in styles.css), then fills the gap with thin .coin-edge slices.
+     data-thickness on the .coin-3d element (fraction of height) tunes how chunky it looks; each
+     component's edge color comes from CSS (.coin-logo/.gold-coin/.coin-orbit .coin-edge), not JS. */
   function initCoinDepth() {
-    document.querySelectorAll(".coin-logo .coin-3d").forEach(function (stage3d) {
+    document.querySelectorAll(".coin-logo .coin-3d, .gold-coin .coin-3d, .coin-orbit .coin-big .coin-3d").forEach(function (stage3d) {
       if (stage3d.dataset.depthBuilt) return;
       stage3d.dataset.depthBuilt = "1";
-      var stage = stage3d.closest(".coin-stage");
-      var h = stage ? parseFloat(getComputedStyle(stage).getPropertyValue("--coin-h")) : NaN;
-      if (!h || isNaN(h)) h = 74;
-      var thickness = Math.max(4, h * 0.11);
-      var count = 24;
+      var rect = stage3d.getBoundingClientRect();
+      var h = rect.height || 74;
+      var fraction = parseFloat(stage3d.dataset.thickness) || 0.11;
+      var thickness = Math.max(3, h * fraction);
+      stage3d.style.setProperty("--half-t", (thickness / 2).toFixed(2) + "px");
+      var count = 22;
       var back = stage3d.querySelector(".coin-face.back");
       for (var i = 1; i < count; i++) {
         var z = -thickness / 2 + (thickness * i) / count;
@@ -297,7 +303,10 @@
     return (
       '<article class="pack-card reveal">' +
         (pack.tag ? '<span class="pack-tag">' + pack.tag + "</span>" : "") +
-        '<div class="pack-coin"><svg viewBox="0 0 200 200"><use href="#ntl-coin-simple"></use></svg></div>' +
+        '<div class="gold-coin"><div class="coin-stage"><div class="coin-3d" data-thickness="0.16">' +
+          '<div class="coin-face front"><svg viewBox="0 0 200 200"><use href="#ntl-coin-face"></use></svg></div>' +
+          '<div class="coin-face back"><svg viewBox="0 0 200 200"><use href="#ntl-coin-face"></use></svg></div>' +
+        "</div></div></div>" +
         '<div><div class="pack-amount">' + fmt(pack.coins) + ' <small>coins</small></div>' +
           '<div class="pack-name">' + pack.name + "</div></div>" +
         '<div class="pack-price">' + euro(pack.price) + "</div>" +
